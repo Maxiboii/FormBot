@@ -1,6 +1,7 @@
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
+from selenium.webdriver.common.keys import Keys
 from time import sleep
 
 
@@ -26,10 +27,10 @@ class Google:
                 self.driver.switch_to.window(window_handle) #coursera
                 break  #coursera
         self.driver.find_element_by_xpath('//input[@type="email"]').send_keys(username)
-        #self.driver.find_element_by_xpath('//*[@id="identifierNext"]').click() #stack
+        self.driver.find_element_by_xpath('//input[@type="email"]').send_keys(Keys.RETURN)
         sleep(5)
         self.driver.find_element_by_xpath('//input[@type="password"]').send_keys(password)
-        # self.driver.find_element_by_xpath('//*[@id="passwordNext"]').click() #stack
+        self.driver.find_element_by_xpath('//input[@type="password"]').send_keys(Keys.RETURN)
         sleep(5)
         self.driver.switch_to.window(original_window) #coursera
         self.driver.get(link)
@@ -52,15 +53,13 @@ class Google:
         self.driver.find_element_by_xpath('//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[12]/label[2]/div/div').click()
         self.driver.find_element_by_xpath('//*[@id="mG61Hd"]/div[2]/div/div[2]/div[2]/div/div/div[2]/div/div[1]/div/div[6]/label[2]/div/div').click()
 
-        self.driver.find_element_by_xpath('//*[@id="i19"]/div[3]/div').click()
+        self.driver.find_element_by_xpath('//*[@id="i16"]/div[3]/div').click()
 
         x = input('quit? (y/n) ')
         if x == 'y':
             self.driver.quit()
 
 
-passw = open('passw.txt',"r",encoding="utf-8")
-password=str(passw.read())
-user=open('user.txt',"r",encoding="utf-8")
-username=str(user.read())
-mylike = Google(username,password)
+usern = input('Enter your email: ')
+passw = input('Enter your password: ')
+mylike = Google(usern,passw)
